@@ -6,8 +6,6 @@ final class CoreDataListRepository: ListRepository {
 
     init(container: NSPersistentContainer) {
         self.container = container
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
     // MARK: - Streams (FRC-backed)
