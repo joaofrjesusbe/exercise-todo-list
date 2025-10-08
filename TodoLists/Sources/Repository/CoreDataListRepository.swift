@@ -15,6 +15,7 @@ final class CoreDataListRepository: ListRepository {
     func listsStream() -> AsyncStream<[TodoList]> {
         let ctx = container.viewContext
         let req = NSFetchRequest<ListMO>(entityName: "ListMO")
+        req.fetchBatchSize = 50
         req.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
 
         return AsyncStream { continuation in
@@ -56,6 +57,7 @@ final class CoreDataListRepository: ListRepository {
         let ctx = container.viewContext
         let req = NSFetchRequest<ReminderMO>(entityName: "ReminderMO")
         req.predicate = NSPredicate(format: "list.id == %@", listId as CVarArg)
+        req.fetchBatchSize = 50
         req.sortDescriptors = [NSSortDescriptor(key: "dueDate", ascending: true)]
 
         return AsyncStream { continuation in
